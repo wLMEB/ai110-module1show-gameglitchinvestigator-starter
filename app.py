@@ -34,10 +34,11 @@ def check_guess(guess, secret):
         return "Win", "🎉 Correct!"
 
     try:
+        #FIX: used claude to pinpoint bug of displaying wrong hint message.
         if guess > secret:
-            return "Too High", "📈 Go HIGHER!"
+            return "Too High", "📉 Go LOWER!"
         else:
-            return "Too Low", "📉 Go LOWER!"
+            return "Too Low", "📈 Go HIGHER!"
     except TypeError:
         g = str(guess)
         if g == secret:
@@ -93,7 +94,7 @@ if "secret" not in st.session_state:
     st.session_state.secret = random.randint(low, high)
 
 if "attempts" not in st.session_state:
-    st.session_state.attempts = 1
+    st.session_state.attempts = 0
 
 if "score" not in st.session_state:
     st.session_state.score = 0
@@ -104,19 +105,15 @@ if "status" not in st.session_state:
 if "history" not in st.session_state:
     st.session_state.history = []
 
+if "last_hint" not in st.session_state:
+    st.session_state.last_hint = None
+
 st.subheader("Make a guess")
 
 st.info(
     f"Guess a number between 1 and 100. "
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
 )
-
-with st.expander("Developer Debug Info"):
-    st.write("Secret:", st.session_state.secret)
-    st.write("Attempts:", st.session_state.attempts)
-    st.write("Score:", st.session_state.score)
-    st.write("Difficulty:", difficulty)
-    st.write("History:", st.session_state.history)
 
 raw_guess = st.text_input(
     "Enter your guess:",
@@ -163,7 +160,7 @@ if submit:
         outcome, message = check_guess(guess_int, secret)
 
         if show_hint:
-            st.warning(message)
+            st.session_state.last_hint = message
 
         st.session_state.score = update_score(
             current_score=st.session_state.score,
@@ -186,6 +183,18 @@ if submit:
                     f"The secret was {st.session_state.secret}. "
                     f"Score: {st.session_state.score}"
                 )
+
+        st.rerun()
+
+if show_hint and st.session_state.last_hint:
+    st.warning(st.session_state.last_hint)
+
+with st.expander("Developer Debug Info"):
+    st.write("Secret:", st.session_state.secret)
+    st.write("Attempts:", st.session_state.attempts)
+    st.write("Score:", st.session_state.score)
+    st.write("Difficulty:", difficulty)
+    st.write("History:", st.session_state.history)
 
 st.divider()
 st.caption("Built by an AI that claims this code is production-ready.")
