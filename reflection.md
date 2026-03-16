@@ -8,13 +8,14 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - List at least two concrete bugs you noticed at the start  
   (for example: "the secret number kept changing" or "the hints were backwards").
 
+Some bugs I found are:
 - Enter does not submit numbers
 - Enter field doesn't clear out after new game or submit guess
 - Hint is not right
-- Score is not initlaized to 0 (tbh what is the point of it?)
+- Score is not initlaized to 0 
 - History is offset by one time
 - History not reset after new game
-- Hint does not reset after new game
+- Hint does not reset after new game and is wrong
 
 ---
 
