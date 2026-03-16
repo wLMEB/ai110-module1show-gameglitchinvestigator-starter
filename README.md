@@ -32,9 +32,13 @@ It wrote the code, ran away, and now the game is unplayable.
 ## 📸 Demo
 
 - [X] [Insert a screenshot of your fixed, winning game here]
+
+
 ![Running Game screenshot](https://github.com/wLMEB/ai110-module1show-gameglitchinvestigator-starter/blob/main/demo/1.png)
 
 ![Winning game screenshot](https://github.com/wLMEB/ai110-module1show-gameglitchinvestigator-starter/blob/main/demo/Winning.png)
+
+Passing test cases with advanced edge cases for fixing bugs in hints.
 ![Passing testcases screenshot](https://github.com/wLMEB/ai110-module1show-gameglitchinvestigator-starter/blob/main/demo/test.png)
 ## 🚀 Stretch Features
 
